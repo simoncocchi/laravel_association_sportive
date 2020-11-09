@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  web:
+    image: nginx:1.18
+    container_name: asso-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/app:cached
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+      - db
+    networks:
+      - asso
+  app:
+    build:
+      args:
+        user: asso
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile-php
+    image: asso
+    container_name: asso-app
+    restart: unless-stopped
+    working_dir: /var/www/app/
+    volumes:
+      - ./:/var/www/app:cached
+    networks:
+      - asso
+  db:
+    image: mariadb:10.5
+    container_name: asso-db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./bdd:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=votremotdepasseroot
+      - MYSQL_DATABASE=association_sportive
+      - MYSQL_USER=association
+      - MYSQL_PASSWORD=azerty
+    networks:
+      - asso
+networks:
+  asso:
+    driver: bridge
