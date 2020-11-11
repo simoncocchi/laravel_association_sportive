@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('accueil');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'show']);
 Route::get('/register', function () {
     return view('register');
 });
