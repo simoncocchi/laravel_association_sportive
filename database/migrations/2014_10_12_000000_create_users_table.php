@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('phone');
             $table->string('address_line_1', 80);
             $table->string('address_line_2', 80);
-            $table->integer('zipcode');
+            $table->string('zipcode');
             $table->string('city');
             $table->boolean('is_admin');
         });
