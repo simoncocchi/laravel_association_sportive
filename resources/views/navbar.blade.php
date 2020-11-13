@@ -38,7 +38,7 @@
     <li><a href="{{route('accueil')}}">Accueil</a></li>
     <li><a href="#news" class="disabled">Contact</a></li>
     <li style="float:right"><a class="disabled" href="#about">Log in</a></li>
-    <li style="float:right"><a href="{{route('register')}}">Register</a></li>
+    <li style="float:right"><a href="/user/create">Register</a></li>
 
 </ul>
 
