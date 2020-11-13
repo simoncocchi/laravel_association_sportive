@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Page créer un compte</h1>
-    <form method="POST" action="{{route('user.store')}}">
+    <form method="POST" action="{{route('users.store')}}">
 
         @csrf
         <label for="name">Nom:</label><br/>
@@ -12,7 +12,7 @@
         <label for="firstname">Prenom:</label><br/>
         <input type="text" id="firstname" name="firstname" required size="25">@error('firstname') <p>Champs incorrect</p> @enderror<br/>
         <label for="email">Email:</label><br/>
-        <input type="email" id="email" name="email" required size="25">@error('email') <p>{{$messages}}</p> @enderror<br/>
+        <input type="email" id="email" name="email" required size="25">@error('email') <p>Champs incorrect</p> @enderror<br/>
         <label for="password">Password:</label><br/>
         <input type="password" id="password" name="password" required size="25">@error('password') <p>Champs incorrect</p> @enderror<br/>
         <label for="phone">Télephone:</label><br/>

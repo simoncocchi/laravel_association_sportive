@@ -15,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('userlist', compact('users'));
     }
 
     /**
@@ -31,34 +32,34 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $UserRequest
+     * @param \Illuminate\Http\Request $UserRequest
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $UserRequest)
     {
         $validated = $UserRequest->validated();
 
-       $User= new User([
-           'name' => $UserRequest->name,
-           'firstname' => $UserRequest->firstname,
-           'email' => $UserRequest->email,
-           'password' => $UserRequest->password,
-           'phone' => $UserRequest->phone,
-           'address_line_1' => $UserRequest->address,
-           'address_line_2' => $UserRequest->addressComp,
-           'zipcode' => $UserRequest->zipcode,
-           'city' => $UserRequest->city,
-       ]);
+        $User = new User([
+            'name' => $UserRequest->name,
+            'firstname' => $UserRequest->firstname,
+            'email' => $UserRequest->email,
+            'password' => $UserRequest->password,
+            'phone' => $UserRequest->phone,
+            'address_line_1' => $UserRequest->address,
+            'address_line_2' => $UserRequest->addressComp,
+            'zipcode' => $UserRequest->zipcode,
+            'city' => $UserRequest->city,
+        ]);
 
         $User->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,34 +70,38 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(user $user)
     {
-        //
+        return view('edituser', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $UserRequest
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $UserRequest, User $user)
     {
-        //
+        $validated = $UserRequest->validated();
+        $user->update($UserRequest->all());
+
+        return back();//redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(user $user)
     {
-        //
+        $user->delete();
+        return back();
     }
 }

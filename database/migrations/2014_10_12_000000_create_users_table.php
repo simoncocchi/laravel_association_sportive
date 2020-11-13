@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('firstname');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('address_line_1', 80);
-            $table->string('address_line_2', 80);
+            $table->string('address_line_2', 80)->nullable();
             $table->string('zipcode');
             $table->string('city');
             $table->boolean('is_admin')->default(0);

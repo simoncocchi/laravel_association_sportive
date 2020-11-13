@@ -19,4 +19,4 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('ac
 Route::get('/login', function () {
     return view('login');
 });
-Route::resource('user', UserController::class);
+Route::resource('users', UserController::class);
