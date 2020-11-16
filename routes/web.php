@@ -15,8 +15,8 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('accueil');
-//Route::get('/register', [\App\Http\Controllers\RegisterController::class, 'show'])->name('register');
-Route::get('/login', function () {
-    return view('login');
-});
 Route::resource('users', UserController::class);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
