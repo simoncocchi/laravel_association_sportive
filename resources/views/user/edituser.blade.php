@@ -4,7 +4,7 @@
 
 @section('content')
 <h1>Editer user {{ $user->id }}</h1>
-<form action="{{route('users.update', $user->id)}}" method="Post">
+<form action="{{route('users.update', $user)}}" method="Post">
     @csrf
     @method('put')
     <label for="name">Nom:</label><br/>

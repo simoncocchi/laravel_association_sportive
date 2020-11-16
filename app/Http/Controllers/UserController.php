@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\User as UserRequest;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -16,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('userlist', compact('users'));
+        return view('user.index', ['users' => $users]);
     }
 
     /**
@@ -26,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('register');
+        return view('user.register');
     }
 
     /**
@@ -37,9 +39,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $UserRequest)
     {
-        $validated = $UserRequest->validated();
 
-        $User = new User([
+        $user = new User([
             'name' => $UserRequest->name,
             'firstname' => $UserRequest->firstname,
             'email' => $UserRequest->email,
@@ -51,7 +52,7 @@ class UserController extends Controller
             'city' => $UserRequest->city,
         ]);
 
-        $User->save();
+        $user->save();
 
         return redirect()->route('users.index');
     }
@@ -62,9 +63,9 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(user $user)
     {
-        //
+        return view('user.showuser', compact('user'));
     }
 
     /**
@@ -75,22 +76,32 @@ class UserController extends Controller
      */
     public function edit(user $user)
     {
-        return view('edituser', compact('user'));
+        return view('user.edituser', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $UserRequest
+     * @param \Illuminate\Http\Request $UserUptadeRequest
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $UserRequest, User $user)
+    public function update(User $user, Request $request)
     {
-        $validated = $UserRequest->validated();
-        $user->update($UserRequest->all());
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'max:255', 'bail', 'string'],
+            'email' => ['required', 'max:255', 'bail', 'email', Rule::unique('users')->ignore($user->id)],
+            'firstname' => ['required', 'max:255', 'bail', 'string'],
+            'phone' => ['min:8', 'max:12', 'bail', 'string', 'nullable'],
+            'address' => ['required', 'string', 'max:80', 'bail'],
+            'addressComp' => ['max:80', 'bail', 'string', 'nullable'],
+            'zipcode' => ['required', 'max:5', 'bail', 'string'],
+            'city' => ['required', 'max:255', 'bail', 'string'],
+            'password' => ['required', 'max:255', 'bail', 'string'],
+        ]);
+        $user->update($request->all());
 
-        return back();//redirect()->route('users.index');
+        return redirect()->route('users.index');
     }
 
     /**

@@ -21,7 +21,7 @@
     <table>
         <thead>
         <tr>
-            <th colspan="11">Tout les utilisateurs</th>
+            <th colspan="12">Tout les utilisateurs</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +47,11 @@
                 <td>
                     <a href="{{ route('users.edit', $user->id) }}">
                         <button type="button">Modifier</button>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ route('users.show', $user->id) }}">
+                        <button type="button">Voir</button>
                     </a>
                 </td>
             </tr>
