@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.register');
+        return view('user.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        return view('user.showuser', compact('user'));
+        return view('user.show', compact('user'));
     }
 
     /**
@@ -76,7 +76,7 @@ class UserController extends Controller
      */
     public function edit(user $user)
     {
-        return view('user.edituser', compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     /**
