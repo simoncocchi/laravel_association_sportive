@@ -23,6 +23,13 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            $table->string('firstname')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address_line_1', 80)->nullable();
+            $table->string('address_line_2', 80)->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('city')->nullable();
+            $table->boolean('is_admin')->default(0)->nullable();
         });
     }
 

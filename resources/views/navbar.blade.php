@@ -37,8 +37,29 @@
 <ul>
     <li><a href="{{route('accueil')}}">Accueil</a></li>
     <li><a href="#news" class="disabled">Contact</a></li>
-    <li style="float:right"><a class="disabled" href="#about">Log in</a></li>
-    <li style="float:right"><a href="/users/create">Register</a></li>
+
+    @if (Route::has('login'))
+
+        @auth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+            <li><a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                    {{ __('Logout') }}</a></li>
+            </form>
+            <li style="float:right"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+        @else
+            <li style="float:right"><a href="{{ route('login') }}">Log in</a></li>
+            @if (Route::has('register'))
+                <li style="float:right"><a href="{{ route('register') }}">Register</a></li>
+                @endif
+                @endif
+                </div>
+        @endif
+
+        <!--  <li style="float:right"><a class="disabled" href="#about">Log in</a></li>
+            <li style="float:right"><a href="/users/create">Register</a></li> -->
 
 </ul>
 

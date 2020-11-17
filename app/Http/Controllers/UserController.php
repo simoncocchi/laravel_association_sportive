@@ -40,11 +40,13 @@ class UserController extends Controller
     public function store(UserRequest $UserRequest)
     {
 
+        $validated = $UserRequest->validated();
+
         $user = new User([
             'name' => $UserRequest->name,
-            'firstname' => $UserRequest->firstname,
             'email' => $UserRequest->email,
             'password' => $UserRequest->password,
+            'firstname' => $UserRequest->firstname,
             'phone' => $UserRequest->phone,
             'address_line_1' => $UserRequest->address,
             'address_line_2' => $UserRequest->addressComp,

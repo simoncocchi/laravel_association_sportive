@@ -13,9 +13,10 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware('auth')->group(function () {
+    Route::resource('users', UserController::class);
+});
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('accueil');
-Route::resource('users', UserController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
