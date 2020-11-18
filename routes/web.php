@@ -18,8 +18,11 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
 });
-Route::resource('licenses', LicenseController::class); //temporaire a mettre en auth
-Route::resource('memberships', MembershipController::class); //temporaire
+Route::middleware('admin')->group(function () {
+    Route::resource('licenses', LicenseController::class); //a mettre en admin
+    Route::resource('memberships', MembershipController::class); //a mettre en admin
+});
+
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('accueil');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
