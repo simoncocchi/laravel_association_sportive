@@ -17,9 +17,9 @@ use App\Http\Controllers\UserController;
 */
 Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
-    Route::resource('licenses', LicenseController::class);
-    Route::resource('memberships', MembershipController::class);
 });
+Route::resource('licenses', LicenseController::class); //temporaire a mettre en auth
+Route::resource('memberships', MembershipController::class); //temporaire
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('accueil');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
