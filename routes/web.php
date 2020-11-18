@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\MembershipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -15,6 +17,8 @@ use App\Http\Controllers\UserController;
 */
 Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
+    Route::resource('licenses', LicenseController::class);
+    Route::resource('memberships', MembershipController::class);
 });
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'show'])->name('accueil');
 
