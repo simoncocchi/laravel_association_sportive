@@ -18,6 +18,12 @@
     </style>
 
     <h1>Liste des utilisateur</h1>
+    <form>
+    <label for="search">Filtrer les utilisateurs:</label>
+    <input type="search" id="search" name="search">
+    <button>Filtrer</button>
+    </form>
+    <br/>
     <table>
         <thead>
         <tr>

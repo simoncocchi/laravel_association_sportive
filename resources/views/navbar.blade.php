@@ -41,6 +41,9 @@
     @if (Route::has('login'))
 
         @auth
+
+            <li><a class="disabled">{{ Auth::user()->name }}</a></li>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
             <li><a href="{{ route('logout') }}"
@@ -48,6 +51,7 @@
                                                             this.closest('form').submit();">
                     {{ __('Logout') }}</a></li>
             </form>
+            <li><a href="{{ route('licenses.index') }}">Licenses</a></li>
             <li style="float:right"><a href="{{ url('/dashboard') }}">Dashboard</a></li>
         @else
             <li style="float:right"><a href="{{ route('login') }}">Log in</a></li>
