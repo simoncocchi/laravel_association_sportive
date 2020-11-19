@@ -18,10 +18,15 @@
     </style>
 
     <h1>Liste des utilisateur</h1>
-    <form>
-    <label for="search">Filtrer les utilisateurs:</label>
-    <input type="search" id="search" name="search">
-    <button>Filtrer</button>
+    <form method="get" action="{{ route('search') }}">
+        <label for="searchinput">Filtrer les utilisateurs:</label>
+        <select name="type" id="type">
+            <option value="name">name</option>
+            <option value="email">email</option>
+            <option value="firstname">firstname</option>
+        </select>
+        <input type="searchinput" id="searchinput" name="searchinput">
+        <button>Filtrer</button>
     </form>
     <br/>
     <table>

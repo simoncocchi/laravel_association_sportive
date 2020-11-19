@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::middleware('auth')->group(function () {
+    Route::get('users/search','App\Http\Controllers\UserController@search')->name('search');
     Route::resource('users', UserController::class);
 });
 Route::middleware('admin')->group(function () {

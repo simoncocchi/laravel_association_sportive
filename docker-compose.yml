@@ -36,7 +36,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./bdd:/var/lib/mysql
+      - ./bdd:/var/lib/mysql:cached
     environment:
       - MYSQL_ROOT_PASSWORD=votremotdepasseroot
       - MYSQL_DATABASE=association_sportive

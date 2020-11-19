@@ -36,13 +36,12 @@
 
 <ul>
     <li><a href="{{route('accueil')}}">Accueil</a></li>
-    <li><a href="#news" class="disabled">Contact</a></li>
 
     @if (Route::has('login'))
 
         @auth
 
-            <li><a class="disabled">{{ Auth::user()->name }}</a></li>
+            <li><a class="disabled">Utilisateur: {{ Auth::user()->name }}</a></li>
 
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

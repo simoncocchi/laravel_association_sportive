@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -116,5 +117,13 @@ class UserController extends Controller
     {
         $user->delete();
         return back();
+    }
+
+    public function search(Request $request)
+    {
+        $type = $request->input('type');
+        $searchInput = $request->input('searchinput');
+        $users = DB::select('select * from users where ' .$type. ' like "%'.$searchInput.'%"');
+        return view('user.index', ['users' => $users]);
     }
 }
